@@ -28,7 +28,7 @@ function draw(){
   if (keyIsPressed === true) {
     if(key==" "){
       if(!recording){
-        recording=true;
+        // recording=true;
         userStartAudio();
         // make sure user enabled the mic
         if (mic.enabled && recording==false) {
