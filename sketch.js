@@ -21,36 +21,63 @@ function setup() {
   // create a sound recorder
   recorder = new p5.SoundRecorder();
   recorder.setInput(mic);
-  text("Press \"r\" to record, \"s\" to stop, \"p\" to play random recording",width/2,height/2)
+  text("Press \"SPACE\" to record, let go to stop, press \"p\" to play random recording",width/2,height/2)
 
 }
-
-
-function keyPressed(){
-  if(key=="r"|| key=="R"){
-    //record
-    userStartAudio();
-    // make sure user enabled the mic
-    if (mic.enabled && recording==false) {
-      recording=true;
-      // record to our soundsRecorded[numberOfSounds]
-      // this sound file will be used to
-      // playback & save the recording
-      soundsRecorded[numberOfSounds] = new p5.SoundFile();
-      recorder.record(soundsRecorded[numberOfSounds]);
-      //increase the number of sounds recorded by 1
-      numberOfSounds++;
-
-      background(255,0,0);
-      text('Recording!', width/2, height/2);
+function draw(){
+  if (keyIsPressed === true) {
+    if(key==" "){
+      if(!recording){
+        recording=true;
+        userStartAudio();
+        // make sure user enabled the mic
+        if (mic.enabled && recording==false) {
+          recording=true;
+          // record to our soundsRecorded[numberOfSounds]
+          // this sound file will be used to
+          // playback & save the recording
+          soundsRecorded[numberOfSounds] = new p5.SoundFile();
+          recorder.record(soundsRecorded[numberOfSounds]);
+          //increase the number of sounds recorded by 1
+          numberOfSounds++;
+    
+          background(255,0,0);
+          text('Recording!', width/2, height/2);
+        }
+      }
     }
-  }
-  if(key=='s'||key=="S"){
-    //stop Recording
+  } else {
     background(0,255,0);
     recorder.stop();
     recording=false;
   }
+}
+
+function keyPressed(){
+  // if(key=="r"|| key=="R"){
+  //   //record
+  //   userStartAudio();
+  //   // make sure user enabled the mic
+  //   if (mic.enabled && recording==false) {
+  //     recording=true;
+  //     // record to our soundsRecorded[numberOfSounds]
+  //     // this sound file will be used to
+  //     // playback & save the recording
+  //     soundsRecorded[numberOfSounds] = new p5.SoundFile();
+  //     recorder.record(soundsRecorded[numberOfSounds]);
+  //     //increase the number of sounds recorded by 1
+  //     numberOfSounds++;
+
+  //     background(255,0,0);
+  //     text('Recording!', width/2, height/2);
+  //   }
+  // }
+  // if(key=='s'||key=="S"){
+  //   //stop Recording
+  //   background(0,255,0);
+  //   recorder.stop();
+  //   recording=false;
+  // }
   if(key=='p'||key=='P'){
    random(soundsRecorded).play(); // play the result!
   }
