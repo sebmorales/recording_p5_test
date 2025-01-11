@@ -48,8 +48,14 @@ function draw(){
     }
   } else {
     background(0,255,0);
-    recorder.stop();
-    recording=false;
+    if(recording){
+      recorder.stop();
+      recording=false;
+      text("Press \"SPACE\" to record, let go to stop, press \"p\" to play random recording",width/2,height/2)
+
+    }
+   
+
   }
 }
 
